@@ -15,3 +15,5 @@ Run npm install inside client server directory
    and open http://localhost:3000 on browser 
    
 4. Content based filtering
+
+5. Merge Sort
