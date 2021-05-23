@@ -28,7 +28,7 @@ const AnswerComment = (props) => {
       let list = await fetchUserComments(props);
       setComment(
         list.data.filter((comment) => {
-          return comment.length > 0;
+          return comment.comment.length > 0;
         })
       );
       setLoading(false);
