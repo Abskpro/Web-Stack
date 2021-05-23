@@ -90,10 +90,10 @@ class App extends Component {
                 <Route path="/register" exact component={Registration} />
                 <Route path = '/result' exact component = {SearchResult}/>
                 <Route path="/details" component={PostDetail}/>
+                  <Route path="/routed/detail/:id/:link" component={PostDetail}/>
                 <PrivateRoute path="/profile" component={Profile}/>
                 <PrivateRoute path="/editPost" component={EditPost}/>
                 <PrivateRoute path="/notify" component={PostNotification}/>
-                <Route path="/routed/detail/:id/:type" component={RoutedPostDetail} />
                 <Route  path="/resetPassword/:token?" exact component={ResetPassword}/>
                 <Route path="/resetPasswordLink" exact component={EmailForm} />
 
@@ -109,4 +109,3 @@ class App extends Component {
 
 export default App;
 
-                  // <Route  path="/resetPassword/link/:token" exact component={ResetPassword}/>

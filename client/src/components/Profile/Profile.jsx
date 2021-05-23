@@ -40,11 +40,12 @@ const Profile = (props) => {
           <Tab eventKey="home" title="Your Posts">
             <UserPosts />
           </Tab>
-          <Tab eventKey="answer" title="Q&A">
-            <AnswerComment />
-          </Tab>
+          
           <Tab eventKey="profile" title="Profile">
             <UserInfo />
+          </Tab>
+          <Tab eventKey="answer" title="Inbox">
+            <AnswerComment />
           </Tab>
         </Tabs>
       </Container>

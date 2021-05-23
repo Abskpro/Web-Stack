@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
 import Model from "./Modal/Modal.jsx";
-import { Link } from "react-router-dom";
 import "./AnswerComment.css";
 
 async function fetchUserComments(props) {
@@ -28,9 +26,12 @@ const AnswerComment = (props) => {
     async function fetchData() {
       setLoading(true);
       let list = await fetchUserComments(props);
-      setComment(list.data);
+      setComment(
+        list.data.filter((comment) => {
+          return comment.length > 0;
+        })
+      );
       setLoading(false);
-      console.log(list.data);
     }
     fetchData();
   }, [props, reload]);
@@ -39,7 +40,6 @@ const AnswerComment = (props) => {
     if (e.target.value) {
       e.preventDefault();
       setResponse(e.target.value);
-      console.log("this is coment" + response);
     }
   }
 
@@ -58,52 +58,49 @@ const AnswerComment = (props) => {
 
   const Post = (props) => (
     <div className="ans-cmt-contents">
-        <Row>
-          <Col xs="6" md="2">
-            <div className="ans-cmt-content">
-              <div className="search-page-image">
-                <img
-                  src={`https://res.cloudinary.com/ds6o6pq2w/image/upload/v1607069456/images/${props.post.image}.jpg`}
-                  alt="#"
-                />
-              </div>
+      <Row>
+        <Col xs="6" md="2">
+          <div className="ans-cmt-content">
+            <div className="search-page-image">
+              <img
+                src={`https://res.cloudinary.com/ds6o6pq2w/image/upload/v1607069456/images/${props.post.image}.jpg`}
+                alt="#"
+              />
             </div>
-          </Col>
-          
-          <Col xs="6" md="10">
-            <div className="ans-cmt-content">
-              <div className="search-page-descriptions">
-                <h4 className="search-page-title">{props.post.title}</h4>
-              </div>
-              <div className="comment-container flex-text">
-                <div>Q: &nbsp;</div>
-                <div className="cmnt">{props.comment.question}</div>
-              </div>
-              {props.comment.isAnswered && (
-                <div className="answer-container flex-text">
-                  <div>A: &nbsp;</div>
-                  <div className="reply">{props.comment.answer}</div>
-                </div>
-              )}
-              <div>
-                <button
-                  className = "reply-btn"
-                  onClick={() => {
-                    console.log("clicked");
-                    setSelectedComment(props);
-                    setModalShow(true);
-                    setClicked(true);
-                  
-                  }}
-                >
-                  Reply
-                </button>
-              </div>
+          </div>
+        </Col>
+
+        <Col xs="6" md="10">
+          <div className="ans-cmt-content">
+            <div className="search-page-descriptions">
+              <h4 className="search-page-title">{props.post.title}</h4>
             </div>
-          </Col>
-      
-    </Row>
-  
+            <div className="comment-container flex-text">
+              <div>Q: &nbsp;</div>
+              <div className="cmnt">{props.comment.question}</div>
+            </div>
+            {props.comment.isAnswered && (
+              <div className="answer-container flex-text">
+                <div>A: &nbsp;</div>
+                <div className="reply">{props.comment.answer}</div>
+              </div>
+            )}
+            <div>
+              <button
+                className="reply-btn"
+                onClick={() => {
+                  console.log("clicked");
+                  setSelectedComment(props);
+                  setModalShow(true);
+                  setClicked(true);
+                }}
+              >
+                Reply
+              </button>
+            </div>
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 
