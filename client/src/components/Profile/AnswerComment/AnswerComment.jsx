@@ -32,6 +32,7 @@ const AnswerComment = (props) => {
         })
       );
       setLoading(false);
+      console.log(list);
     }
     fetchData();
   }, [props, reload]);
@@ -57,7 +58,7 @@ const AnswerComment = (props) => {
   }
 
   const Post = (props) => (
-    <div className="ans-cmt-contents">
+<div className={props.comment.isAnswered ? "ans-cmt-contents-white" : "ans-cmt-contents-grey"}>
       <Row>
         <Col xs="6" md="2">
           <div className="ans-cmt-content">

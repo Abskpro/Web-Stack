@@ -3,10 +3,10 @@ import { Link, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Container, Row, Col } from "react-bootstrap";
 import { displayDetails } from "../../../actions/postAction.js";
+import EllipsisText from "react-ellipsis-text";
 import "./Post.css";
 
 const Post = (props) => {
-
   return (
     <div className="search-page-content">
       <Row>
@@ -21,14 +21,16 @@ const Post = (props) => {
         <Col xs="6" md="10">
           <div className="search-page-descriptions">
             <h3 className="search-page-title">{props.post.title}</h3>
-            <p className="search-page-description">{props.post.description}</p>
-            <div>{props.post.price}</div>
-            <div className="detail">
-              <Link
-                to={{ pathname: `${props.url}`, state: props.post }}
-              >
-                Details
-              </Link>
+            <EllipsisText text={props.post.description} length={"300"} />
+            <br />
+            <br />
+            <div className="flexy-bottom">
+              <div className="detail">
+                <Link to={{ pathname: `${props.url}`, state: props.post }}>
+                  Details
+                </Link>
+              </div>
+              <div>Rs {props.post.price}</div>
             </div>
           </div>
         </Col>
@@ -49,7 +51,14 @@ const Posts = (props) => {
     console.log(props);
     return props.posts.map((post, index) => {
       console.log(props);
-      return <Post post={post} key={post._id} url={props.url} update={props.update}/>;
+      return (
+        <Post
+          post={post}
+          key={post._id}
+          url={props.url}
+          update={props.update}
+        />
+      );
     });
   }
 
