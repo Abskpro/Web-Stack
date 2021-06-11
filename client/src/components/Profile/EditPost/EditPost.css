@@ -1,100 +1,33 @@
-
-
-
-.user-section{ 
-    margin-top: 60px;
-    /* padding: 16px 0; */
-    height: 100vh;
-    overflow-y: scroll;
-    background-color: #ebebeb;
-    
+.post-image {
+	/* width: 200px; */
+	/* display: flex; */
+	/* flex-direction: row; */
+	/* padding: 0 16px; */
 }
-.user-section::-webkit-scrollbar{
-    display: none;
+.post-image img {
+	display: inline-block;
+	max-width: 100%;
 }
-.user-section-holder form .col{
-    margin: 16px;
-}
-.user-section-holder form label,
-.user-section-holder form input,
-.user-section-holder form select{
-    font-size: 16px;
-    display: block;
-    width: 100%;
-   
-    
+.map {
+	position: relative;
+	height: 100%;
 }
 
-.user-section-holder form label{
-    text-transform: capitalize;
+.mapContainer {
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	height: 200px;
 }
-
-.user-section-holder form input{
-  
-    border-radius: 4px;
-    padding-left:8px;
+.btn-content {
+	text-align: center;
 }
-.user-section-holder .map-content{
-    height: 200px;
-    position: relative;
-}
-.user-section ._2iA8p44d0WZ-WqRBGcAuEV {
-    border: none;
-    border-radius: none;
-    padding: 0px;
-    background: #fff;
-    margin-top: 0;
-
-
-    
-}
-.user-section .mapboxgl-ctrl-geocoder{
-    box-shadow: none;
-    min-width: 100%;
-}
-.user-section input[type = "submit"]{
-    display: inline-block;
-    width: 100px;
-    margin: 0 auto;
-    padding: 10px 16px;
-    background-color: #fff;
-    
-
-}
-.user-section .mapboxgl-ctrl-geocoder--icon {
-    top: 3px;
-}
-
-
-@media(min-width: 640px){
-    .user-section .mapboxgl-ctrl-geocoder--input{
-        height: 25px;
-        padding: 6px 35px;
-    }
-
-}
-
-
-.map{
-    position:relative;
-    height:100%;
-}
-
-.mapContainer{
-    position: absolute;
-    overflow:hidden;
-    top:0;
-    bottom:0;
-    width:100%;
-    height:200px;
-}
-.btn-content{
-    text-align: center;
-}
-.btn-delete{
-    display: inline-block;
-    padding: 10px 16px;
-    margin-left: 32px;
-    border-radius: 5px;
-    cursor: pointer;
+.btn-delete {
+	display: inline-block;
+	padding: 10px 16px;
+	margin-left: 32px;
+	border-radius: 5px;
+	cursor: pointer;
 }

@@ -1,76 +1,84 @@
 .user-section {
-  margin-top: 0px !important;
-  /* padding: 16px 0; */
-  height: 100vh;
-  overflow-y: scroll;
-  background-color: #ebebeb;
+	margin-top: 0px;
+	/* padding: 16px 0; */
+	height: 100vh;
+	overflow-y: scroll;
+	background-color: #ebebeb;
 }
 .user-section::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 .user-section-holder form .col {
-  margin: 16px;
+	margin: 16px;
 }
 .user-section-holder form label,
 .user-section-holder form input,
-.user-section-holder form select {
-  font-size: 16px;
-  display: block;
-  width: 100%;
+.user-section-holder form select,
+.user-section-holder form textarea {
+	font-size: 16px;
+	display: block;
+	width: 100%;
+	padding: 10px 0px;
 }
 
 .user-section-holder form label {
-  text-transform: capitalize;
+	text-transform: uppercase;
+	/* padding: 0 16px; */
+	margin-bottom: 8px;
 }
 
 .user-section-holder form input {
-  border-radius: 4px;
-  padding-left: 8px;
+	border-radius: 4px;
+	padding: 10px 16px;
+}
+.user-section-holder form textarea {
+	padding: 10px 16px;
 }
 .user-section-holder .map-content {
-  /* height: 700px !important; */
-  height: 500px !important;
-  position: relative;
+	/* height: 700px !important; */
+	height: 500px !important;
+	position: relative;
 }
 .user-section ._2iA8p44d0WZ-WqRBGcAuEV {
-  border: none;
-  border-radius: none;
-  padding: 0px;
-  background: #fff;
-  margin-top: 0;
+	border: none;
+	border-radius: none;
+	padding: 0px;
+	background: #fff;
+	margin-top: 0;
 }
 .user-section .mapboxgl-ctrl-geocoder {
-  box-shadow: none;
-  min-width: 100%;
+	box-shadow: none;
+	min-width: 100%;
 }
-.user-section input[type="submit"] {
-  display: inline-block;
-  width: 100px;
-  margin: 0 auto;
-  padding: 10px 16px;
-  background-color: #fff;
+.user-section input[type='submit'] {
+	display: inline-block;
+	width: 100px;
+	margin: 0 auto;
+	padding: 10px 16px !important;
+	background-color: #fff;
 }
-.btn-content {
-  text-align: center;
+.user-section .btn-content {
+	text-align: center;
 }
 .user-section .mapboxgl-ctrl-geocoder--icon {
-  top: 3px;
+	top: 3px;
+	/* padding: 1000px 0; */
 }
 
 @media (min-width: 640px) {
-  .user-section .mapboxgl-ctrl-geocoder--input {
-    height: 25px;
-    padding: 6px 35px;
-  }
+	.user-section .mapboxgl-ctrl-geocoder--input {
+		height: 25px;
+		padding: 6px 35px;
+	}
 }
 
 /* remove arrow from input number */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
-.mapboxgl-canvas{
-  height:500px !important;
+.mapboxgl-canvas {
+	height: 500px !important;
 }

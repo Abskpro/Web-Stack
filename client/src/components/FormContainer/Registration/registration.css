@@ -1,49 +1,102 @@
 .reg-contents {
-    margin-top: 58px;
-    height: 100vh;
-    background-color: #ebebeb;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
+	/* margin-top: 58px; */
+	height: calc(100vh - 124px);
+	overflow-y: scroll;
+	background-color: #ebebeb;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 16px 0;
 }
-.reg-contents form{
-    /* padding: 200px; */
-    width: 50%;
+.reg-contents::-webkit-scrollbar {
+	display: none;
 }
-.reg-contents form input[type = text],
-.reg-contents form input[type = tel],
-.reg-contents form input[type = email],
-.reg-contents form input[type = password]{
-    display: inline-block;
-    width: 90%;
-    padding: 10px 15px;
-    /* border: 2px solid black; */
-
+.reg-contents form {
+	/* padding: 200px; */
+	width: 50%;
 }
-.row::after{
-    content: " ";
-    clear: both;
-    display: table;
+.reg-contents .row {
+	margin-bottom: 8px;
+}
+.reg-contents form label {
+	display: inline-block;
+	width: 100%;
+	padding: 10px 0;
+	text-transform: capitalize;
+	font-weight: 600;
+	color: #596069;
+}
+.reg-contents form input[type='text'],
+.reg-contents form input[type='tel'],
+.reg-contents form input[type='email'],
+.reg-contents form input[type='password'] {
+	display: inline-block;
+	width: 100%;
+	padding: 10px 15px;
+	/* border: 2px solid black; */
+}
+.row::after {
+	content: ' ';
+	clear: both;
+	display: table;
 }
 .reg-contents form .col-25 {
-    float: left;
-    width: 25%;
-    margin-top: 6px;
-    /* padding: 10px 0; */
-    
+	float: left;
+	width: 25%;
+	margin-top: 6px;
+	/* padding: 10px 0; */
 }
 .reg-contents form .col-75 {
-    float: left;
-    width: 75%;
-    margin-top: 6px;
-    /* padding: 10px 0; */
+	float: left;
+	width: 75%;
+	margin-top: 6px;
+	/* padding: 10px 0; */
 }
-.reg-contents form input[type="submit"] {
-    width: 100px;
-    display: block;
-    margin: 0 auto;
-    margin-top: 15px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
+#reg-submit {
+	width: 100%;
+	text-align: center;
+}
+.reg-contents form input[type='submit'] {
+	/* text-align: center; */
+	display: inline-block;
+	padding: 12px 26px;
+	background-color: #9a9ea3;
+	color: #fff;
+	letter-spacing: 0.7px;
+	text-transform: uppercase;
+	margin-top: 15px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+}
+#login-redirect {
+	text-align: right;
+}
+/*Media queries*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 991px) {
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width: 767px) {
+	.reg-contents form {
+		/* padding: 200px; */
+		width: 100%;
+
+		padding: 0 48px;
+	}
+}
+/*Small devices*/
+@media only screen and (max-width: 575px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 479px) {
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 319px) {
 }

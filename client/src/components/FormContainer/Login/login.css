@@ -1,55 +1,48 @@
 .login-contents {
-    margin-top: 60px;
-    height: 100vh;
-    background-color: #ebebeb;
-    /* position: relative; */
-    /* display: table */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	/* margin-top: 60px; */
+	height: calc(100vh - 124px);
+	overflow: hidden;
+	background-color: #ebebeb;
+	/* position: relative; */
+	/* display: table */
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-.login-contents form{
-    /* text-align: center; */
-    padding: 16px;
-    width: 50%;
+.login-contents form {
+	/* width: 50%; */
 }
-.login-contents form input[type = email],
-.login-contents form input[type = password]{
-    display: inline-block;
-    width: 90%;
-
+.login-contents form label {
+	font-size: 20px;
+	pad: 10px;
+	margin-bottom: 16px;
 }
-.login-contents form .row::after{
-    content: " ";
-    clear: both;
-    display: table;
+.login-contents form input[type='email'],
+.login-contents form input[type='password'] {
+	margin-bottom: 16px;
+	display: inline-block;
+	width: 100%;
+	padding: 10px 15px;
 }
-.login-contents form .col-25 {
-    float: left;
-    width: 25%;
-    margin-top: 6px;
-}
-.login-contents form .col-75 {
-    float: left;
-    width: 75%;
-    margin-top: 6px;
-}
-.login-contents input[type = "email"],
-.login-contents input[type = "password"]{
-    display: inline-block;
-    width: 90%;
-    padding: 10px 15px;
-
-}
-.login-contents form input[type="submit"] {
-    width: 100px;
-    display: block;
-    margin: 0 auto;
-    margin-top: 15px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
+.login-contents form input[type='submit'] {
+	display: inline-block;
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	padding: 10px 26px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	letter-spacing: 0.5px;
+	color: #fff;
+	background-color: rgb(56, 60, 65);
 }
 
-.log-flex-container{
-  display:flex;
+.login-content-mis {
+	text-align: right;
+}
+
+.login-content-mis span {
+	text-transform: capitalize;
+	font-size: 12px;
+	margin-left: 16px;
 }

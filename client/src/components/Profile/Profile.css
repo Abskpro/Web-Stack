@@ -1,11 +1,10 @@
-.tab-section{
-    margin-top: 60px;
-    background-color: #ebebeb;
-    height: 100vh;
-    overflow-y: scroll;
-    padding: 16px 0;
-
+.tab-section {
+	/* margin-top: 60px; */
+	background-color: #ebebeb;
+	height: 100vh;
+	overflow-y: scroll;
+	padding: 16px 0;
 }
-.tab-section::-webkit-scrollbar{
-    display: none;
+.tab-section::-webkit-scrollbar {
+	display: none;
 }
