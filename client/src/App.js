@@ -149,6 +149,7 @@ class App extends Component {
 								/>
 							</Switch>
 
+
 							<Footer />
 						</div>
 					</Router>
@@ -160,4 +161,3 @@ class App extends Component {
 
 export default App;
 
-// <Route  path="/resetPassword/link/:token" exact component={ResetPassword}/>

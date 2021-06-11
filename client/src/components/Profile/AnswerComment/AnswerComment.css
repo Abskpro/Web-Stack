@@ -2,13 +2,20 @@
   display:flex;
 }
 
-.ans-cmt-contents{
+.ans-cmt-contents-grey{
   margin: 16px 0;
   padding: 16px 12px;
-  background-color: #f1f1f1;
+  background-color: #f5f5f5;
   /* border-radius: 12px; */
-
 }
+
+.ans-cmt-contents-white{
+  margin: 16px 0;
+  padding: 16px 12px;
+  background-color: #FFFFFF;
+  /* border-radius: 12px; */
+}
+
 .comment-container,
 .answer-container{
   padding-left: 16px;
