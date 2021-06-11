@@ -63,7 +63,7 @@ const addRoomPost = async (req, res, next) => {
         .catch((err) => res.status(400).json("error" + err));
     });
   } catch (err) {
-    res.status(500).json({ err: "Something went wrong" });
+    res.status(500).json({ err: err });
   }
 };
 
@@ -80,7 +80,6 @@ const addHousePost = async (req, res, next) => {
   try {
     const datas = JSON.parse(_.imageCollection);
     const arr = [];
-    console.log("asdfas");
     await Promise.all(
       datas.map(async (data) => {
         let id = uuidv4();

@@ -35,27 +35,47 @@ const PostDetail = (props) => {
   const [question, setQuestion] = useState("");
   const [btnColor, setBtnColor] = useState("btn-disable");
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingComment, setLoadingComments] = useState(true);
+  const [post, setPost] = useState(null);
 
   function displayImage() {
     console.log(props.location.state);
-    return props.location.state.imageCollection.map((image, index) => {
+    return post.imageCollection.map((image, index) => {
       let url = `https://res.cloudinary.com/ds6o6pq2w/image/upload/v1605056350/images/${image}`;
-      return <Image img={url} key={props.location.state._id} />;
+      return <Image img={url} key={post._id} />;
     });
   }
 
   useEffect(() => {
-    console.log(props.auth);
+      console.log(props.location.state);
+    if (props.location.state != undefined) {
+      setPost(props.location.state);
+      setLoading(false);
+    } else {
+      console.log("secondj aiasdf runnig");
+      axios
+        .get(
+          `/api/search/post/${props.match.params.id}/${props.match.params.type}`
+        )
+        .then((data) => {
+          console.log(data);
+          setPost(data.data);
+          setLoading(false);
+        });
+    }
     localStorage.jwtToken != null ? setIsLogged(true) : setIsLogged(false);
-    axios
-      .get(`/api/comment/loadComment/${props.location.state._id}`)
-      .then((data) => {
-        console.log(data.data);
-        setComments(data.data);
-      });
   }, []);
 
   function loadComment() {
+    console.log("loading is " + loading + "and post is  " + post); 
+    if (loadingComment && post != null) {
+      axios.get(`/api/comment/loadComment/${post._id}`).then((data) => {
+        console.log(data.data);
+        setComments(data.data);
+        setLoadingComments(false);
+      });
+    }
     return comments.map((currentComment, index) => {
       return <Comment comment={currentComment} key={currentComment._id} />;
     });
@@ -66,7 +86,7 @@ const PostDetail = (props) => {
       setBtnColor("btn-enable");
       console.log(props.auth);
       let id = {
-        postId: props.location.state._id,
+        postId: post._id,
         userId: props.auth.user.id,
       };
       let data = {
@@ -103,7 +123,7 @@ const PostDetail = (props) => {
 
           console.log(data);
           axios
-            .get(`/api/comment/loadComment/${props.location.state._id}`)
+            .get(`/api/comment/loadComment/${post._id}`)
             .then((data) => {
               console.log(data);
               setComments(data.data);
@@ -115,131 +135,133 @@ const PostDetail = (props) => {
   }
 
   return (
-    <div className="post-detail-container">
-      <Container>
-        <h2>Room Description</h2>
-
-        <Row>
-          <Col>
-            <div className="post-detail-content image-container">
-              <Carousel autoPlay>{displayImage()}</Carousel>
-            </div>
-          </Col>
-
-          <Col>
-            <div className=" post-detail-content post-details-info">
-              <div className="post-title">
-                <h5>{props.location.state.title}</h5>
-              </div>
-
-              <div className="basic-info">
-                <div>Name: {props.location.state.name}</div>
-                <div>
-                  Email:{" "}
-                  <a href="#" id="mail">
-                    {props.location.state.email}
-                  </a>
+    <div>
+      {loading || !post ? (
+        <h1>loading ...</h1>
+      ) : (
+        <div className="post-detail-container">
+          <Container>
+            <h2>Room Description</h2>
+            <Row>
+              <Col>
+                <div className="post-detail-content image-container">
+                  <Carousel autoPlay>{displayImage()}</Carousel>
                 </div>
-                <div>
-                  Number:{" "}
-                  <a href={props.location.state.number}>
-                    {props.location.state.number}
-                  </a>
+              </Col>
+
+              <Col>
+                <div className=" post-detail-content post-details-info">
+                  <div className="post-title">
+                    <h5>{post.title}</h5>
+                  </div>
+
+                  <div className="basic-info">
+                    <div>Name: {post.name}</div>
+                    <div>
+                      Email:{" "}
+                      <a href="#" id="mail">
+                        {post.email}
+                      </a>
+                    </div>
+                    <div>
+                      Number: <a href={post.number}>{post.number}</a>
+                    </div>
+                  </div>
+
+                  <div className="post-description">
+                    <h5>Description</h5>
+                    <p>{post.description}</p>
+                  </div>
+
+                  <div className="post-room-state">
+                    <h5>Benifits</h5>
+                    <ul id="room-status">
+                      <li>Room: {post.furnished}</li>
+
+                      <li>Bedroom: {post.rooms.bedroom}</li>
+                      <li>Kitchen: {post.rooms.kitchen}</li>
+                      <li>livingRoom: {post.rooms.livingRoom}</li>
+
+                      <li>toilet: {post.rooms.toilet}</li>
+                    </ul>
+                  </div>
+
+                  <div className="post-room-facilities">
+                    <h5>Facilities:</h5>
+                    <ul>
+                      {post.facilities.map((facility, index) => (
+                        <li>{facility}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {post.area && (
+                    <div className="post-room-facilities">
+                      <h5>Area:</h5>
+                      <p>{post.area} sqft</p>
+                    </div>
+                  )}
                 </div>
-              </div>
+              </Col>
+            </Row>
 
-              <div className="post-description">
-                <h5>Description</h5>
-                <p>{props.location.state.description}</p>
-              </div>
+            <Row>
+              <Col>
+                <h5>Location</h5>
+                <Map
+                  lng={post.coordinates.longitude}
+                  lat={post.coordinates.latitude}
+                />
+              </Col>
+            </Row>
 
-              <div className="post-room-state">
-                <h5>Benifits</h5>
-                <ul id="room-status">
-                  <li>Room: {props.location.state.furnished}</li>
+            <div className="post-room-comment">
+              <h5>Comment</h5>
+              {isLogged ? (
+                <div className="cmnt-container">
+                  <textarea
+                    name="cmnt"
+                    id="comment"
+                    cols="70"
+                    rows="3"
+                    placeholder="Add Comment"
+                    value={question}
+                    onChange={(e) => {
+                      setQuestion(e.target.value);
+                    }}
+                  ></textarea>
 
-                  <li>Bedroom: {props.location.state.rooms.bedroom}</li>
-                  <li>Kitchen: {props.location.state.rooms.kitchen}</li>
-                  <li>livingRoom: {props.location.state.rooms.livingRoom}</li>
-
-                  <li>toilet: {props.location.state.rooms.toilet}</li>
-                </ul>
-              </div>
-
-              <div className="post-room-facilities">
-                <h5>Facilities:</h5>
-                <ul>
-                  {props.location.state.facilities.map((facility, index) => (
-                    <li>{facility}</li>
-                  ))}
-                </ul>
-              </div>
-
-              {props.location.state.area && (
-                <div className="post-room-facilities">
-                  <h5>Area:</h5>
-                  <p>{props.location.state.area} sqft</p>
+                  <button
+                    disabled={question.length < 1}
+                    className={btnColor}
+                    id="comment-btn"
+                    onClick={comment}
+                  >
+                    Add Comment
+                  </button>
                 </div>
+              ) : (
+                <span>Log in to add comment</span>
               )}
+              <div className="post-comments">
+                <div className="comment-container">{loadComment()}</div>
+              </div>
             </div>
-          </Col>
-        </Row>
 
-        <Row>
-          <Col>
-            <h5>Location</h5>
-            <Map
-              lng={props.location.state.coordinates.longitude}
-              lat={props.location.state.coordinates.latitude}
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
             />
-          </Col>
-        </Row>
-
-        <div className="post-room-comment">
-          <h5>Comment</h5>
-          {isLogged ? (
-            <div className="cmnt-container">
-              <textarea
-                name="cmnt"
-                id="comment"
-                cols="70"
-                rows="3"
-                placeholder="Add Comment"
-                value={question}
-                onChange={(e) => {
-                  setQuestion(e.target.value);
-                }}
-              ></textarea>
-
-              <button
-                disabled={question.length < 1}
-                className={btnColor}
-                id="comment-btn"
-                onClick={comment}
-              >
-                Add Comment
-              </button>
-            </div>
-          ) : (
-            <span>Log in to add comment</span>
-          )}
-          <div className="post-comments">
-            <div className="comment-container">{loadComment()}</div>
-          </div>
+          </Container>
         </div>
-
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-      </Container>
+      )}
     </div>
   );
 };

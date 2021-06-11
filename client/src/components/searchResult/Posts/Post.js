@@ -1,5 +1,5 @@
+
 import React from 'react';
-// import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -70,6 +70,7 @@ const Posts = (props) => {
 			);
 		});
 	}
+
 
 	return <div className='posts-group-container'>{displayPost()}</div>;
 };

@@ -37,6 +37,7 @@ class Map extends React.Component {
     map.on("load", function () {
       map.resize();
     });
+    map.scrollZoom.disable();
   }
 
   componentWillReceiveProps(nextProps) {
