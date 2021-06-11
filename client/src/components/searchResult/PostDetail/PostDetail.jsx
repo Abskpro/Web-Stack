@@ -36,6 +36,7 @@ const PostDetail = (props) => {
   const [btnColor, setBtnColor] = useState("btn-disable");
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingComment, setLoadingComments] = useState(true);
   const [post, setPost] = useState(null);
 
   function displayImage() {
@@ -67,10 +68,12 @@ const PostDetail = (props) => {
   }, []);
 
   function loadComment() {
-    if (!loading && post) {
+    console.log("loading is " + loading + "and post is  " + post); 
+    if (loadingComment && post != null) {
       axios.get(`/api/comment/loadComment/${post._id}`).then((data) => {
         console.log(data.data);
         setComments(data.data);
+        setLoadingComments(false);
       });
     }
     return comments.map((currentComment, index) => {
