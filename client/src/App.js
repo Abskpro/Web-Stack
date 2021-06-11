@@ -20,7 +20,6 @@ import Login from './components/FormContainer/Login/login.jsx';
 import Registration from './components/FormContainer/Registration/registration.jsx';
 import PrivateRoute from './components/privateRoute/privateRoute.jsx';
 import EditPost from './components/Profile/EditPost/EditPost.jsx';
-
 import SearchResult from './components/searchResult/SearchResult';
 import PostDetail from './components/searchResult/PostDetail/PostDetail.jsx';
 import setAuthToken from './utils/setAuthToken.jsx';
