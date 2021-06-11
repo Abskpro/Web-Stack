@@ -1,0 +1,44 @@
+#terms-and-service {
+	height: 100vh;
+	padding-top: 32px;
+	overflow-y: scroll;
+}
+#terms-and-service::-webkit-scrollbar {
+	display: none;
+}
+#terms-and-service article {
+	margin: 16px 0 0 16px;
+}
+#terms-and-service p {
+	padding-left: 12px;
+	width: 50%;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+/*Media queries*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 991px) {
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width: 767px) {
+	#terms-and-service p {
+		width: 100%;
+	}
+}
+/*Small devices*/
+@media only screen and (max-width: 575px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 479px) {
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 319px) {
+}

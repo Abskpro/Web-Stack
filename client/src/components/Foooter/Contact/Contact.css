@@ -1,0 +1,58 @@
+#contact {
+	height: calc(100vh - 124px);
+
+	overflow-y: scroll;
+	text-align: center;
+	display: flex;
+	align-items: center;
+}
+.contact::-webkit-scrollbar {
+	display: none;
+}
+#contact h2 {
+	margin: 0;
+	text-transform: capitalize;
+}
+.contact-info {
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 600;
+	color: #0077c7;
+	margin-top: 16px;
+	text-decoration: underline;
+}
+.social-info {
+	margin-top: 16px;
+}
+.social-info a {
+	display: inline-block;
+	padding: 0 16px;
+}
+.social-info a i {
+	display: inline-block;
+}
+
+/*Media queries*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 991px) {
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width: 767px) {
+}
+/*Small devices*/
+@media only screen and (max-width: 575px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 479px) {
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 319px) {
+}

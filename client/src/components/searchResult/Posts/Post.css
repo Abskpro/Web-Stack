@@ -1,3 +1,14 @@
-.search-page-title{
-    text-transform: capitalize;
+.search-page-content {
+	width: 70%;
+}
+.search-page-title {
+	text-transform: capitalize;
+}
+.search-page-description {
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+.post-price {
+	font-size: 18px;
+	font-weight: 500;
 }
