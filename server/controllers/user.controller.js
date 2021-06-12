@@ -1,5 +1,5 @@
 const validateRegisterInput = require("../validation/register.validate.js");
-
+const path = require("path");
 const validateLoginInput = require("../validation/login.validate.js");
 const validateResetPassword = require("../validation/resetPassword.validate.js");
 const key = require("../config/key.js");
@@ -91,7 +91,7 @@ const verifyUser = (req, res) => {
     }
     console.log(token._id, token._userId);
     User.findOneAndUpdate({ _id: token._userId }, { isVerified: true }).then(
-      res.json({ message: "you have been verified" })
+      res.sendFile(path.resolve(__dirname, "../landing", "verified.html"))
     );
   });
 };

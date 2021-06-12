@@ -1,8 +1,8 @@
-import { DISPLAY_MSG , GET_ERRORS } from "../actions/types";
+import { DISPLAY_MSG, GET_ERRORS , RESET} from "../actions/types";
 const isEmpty = require("is-empty");
 
 const initialState = {
-  message:{},
+  message: {},
   error: {},
 };
 
@@ -13,6 +13,9 @@ export default function (state = initialState, action) {
         ...state,
         message: action.payload,
       };
+    case RESET:
+      return initialState;
+
     case GET_ERRORS:
       return {
         ...state,
