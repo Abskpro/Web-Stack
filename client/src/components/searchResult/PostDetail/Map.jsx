@@ -19,6 +19,7 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     this.setState({ lng: this.props.lng });
     this.setState({ lat: this.props.lat });
     const map = new mapboxgl.Map({
