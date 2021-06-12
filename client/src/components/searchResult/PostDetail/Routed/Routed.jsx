@@ -10,7 +10,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "../PostDetails.css";
-import Map from "../../../../utils/Maps/Map.jsx";
+// import Map from "../../../../utils/Maps/Map.jsx";
+import Map from "../Map.jsx";
 
 const Image = (props) => (
   <div>
@@ -94,9 +95,7 @@ class RoutedPostDetail extends React.Component {
           ? this.setState({ isLogged: true })
           : this.setState({ isLogged: false });
         axios
-          .get(
-            `/api/comment/loadComment/${this.state.postId}`
-          )
+          .get(`/api/comment/loadComment/${this.state.postId}`)
           .then((data) => {
             console.log(data.data);
             this.setState({ comments: data.data });
@@ -125,10 +124,7 @@ class RoutedPostDetail extends React.Component {
         question: this.state.question,
       };
       axios
-        .post(
-          `/api/comment/addComment/${JSON.stringify(id)}`,
-          data
-        )
+        .post(`/api/comment/addComment/${JSON.stringify(id)}`, data)
         .then((data) => {
           this.setState({ question: "" });
           if (data.status == 200) {
@@ -156,9 +152,7 @@ class RoutedPostDetail extends React.Component {
 
           console.log(data);
           axios
-            .get(
-              `/api/comment/loadComment/${this.state.postId}`
-            )
+            .get(`/api/comment/loadComment/${this.state.postId}`)
             .then((data) => {
               console.log(data);
               this.setState({ comments: data.data });
@@ -247,10 +241,12 @@ class RoutedPostDetail extends React.Component {
           <div className="post-detail-outer-content">
             <div className="post-room-location-container">
               <h5>Location</h5>
-              <div className="post-room-location">
-                <div>Map</div>
+              {this.state.longitude > 0 && (
+                <div className="post-room-location">
+                  <div>Map</div>
                   <Map lng={this.state.longitude} lat={this.state.latitude} />
-              </div>
+                </div>
+              )}
             </div>
 
             <div className="post-room-comment">
