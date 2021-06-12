@@ -3,7 +3,8 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-import { Form, Button, Spinner } from "react-bootstrap"; import { resetPasswordLink } from "../../../actions/authAction.jsx";
+import { Form, Button, Spinner } from "react-bootstrap";
+import { resetPasswordLink } from "../../../actions/authAction.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import "./ResetPassword.css";
 
@@ -20,19 +21,8 @@ class EmailForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
-
-    // if (nextProps.msg.message.status == 200) {
-    //   this.props.history.push({
-    //     pathname: "/profile",
-    //     state: nextProps.auth,
-    //   });
-    // }
-    if (
-      nextProps.errors.response.status == 403 ||
-      nextProps.errors.response.status == 404
-    ) {
-      this.setState({ isProcessing: false });
-      toast.info(`${nextProps.errors.response.data.msg}`, {
+    if (nextProps.msg.message.status == 201) {
+      toast.info(`${nextProps.msg.message.data.msg}`, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -41,19 +31,19 @@ class EmailForm extends React.Component {
         draggable: true,
         progress: undefined,
       });
+      this.setState({ isProcessing: false });
+    } else {
+      toast.info(`Something went wrong try again`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      this.setState({ isProcessing: false });
     }
-    // if (nextProps.errors.response.status == 400) {
-    //   this.setState({ isProcessing: false });
-    //   toast.info(`${nextProps.errors.response.data.password2}`, {
-    //     position: "bottom-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //   });
-    // }
   }
 
   onChange = (e) => {

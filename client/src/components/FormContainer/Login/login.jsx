@@ -65,7 +65,8 @@ class Login extends React.Component {
 				state: nextProps.auth,
 			});
 		} else {
-			console.log(Object.keys(nextProps.errors).length === 0);
+			// console.log(Object.keys(nextProps.errors).length === 0);
+      console.log(nextProps);
 			if (Object.keys(nextProps.errors).length != 0) {
 				if (
 					nextProps.errors.response.status == 400
