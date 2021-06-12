@@ -114,7 +114,7 @@ const UPDATE_USER_POST = async (req, res) => {
       console.log(updated);
       Room.findByIdAndUpdate(req.params.id, updated).then((data) => {
         console.log(data);
-        res.status(201).send({ msg: "Post Updated" });
+        res.status(200).send({ msg: "Post Updated" });
         // res.json({ message: "Post updated" });
       });
     });
@@ -144,7 +144,7 @@ const UPDATE_USER_POST = async (req, res) => {
     Room.findByIdAndUpdate(req.params.id, updated).then((data) => {
       console.log(data);
       // res.json({ message: "Post updated" });
-      res.status(201).send({ msg: "Post Updated" });
+      res.status(200).send({ msg: "Post Updated" });
     });
   }
 };
@@ -249,7 +249,7 @@ const DELETE_USER_POST = (req, res) => {
           });
         });
       })
-      .then(() => res.json("post deleted"))
+      .then(() => res.status(200).send({msg: "Post deleted Successfully"}))
       .catch((err) => res.status(404).json("error" + err));
   } else {
     House.findByIdAndDelete(req.params.id)
@@ -262,7 +262,7 @@ const DELETE_USER_POST = (req, res) => {
           );
         });
       })
-      .then(() => res.json("post deleted"))
+      .then(() => res.status(200).send({msg: "Post deleted Successfully"}))
       .catch((err) => res.status(404).json("error" + err));
   }
 };

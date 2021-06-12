@@ -19,10 +19,12 @@ export const displayDetails = (data) => (dispatch) => {
 //simple message tranfer to routed screen
 //todo add the api and route the message and data
 export const routeAndDisplay = (msg) => (dispatch) => {
+  console.log(msg);
   dispatch(setMessage(msg));
 };
 
 export const setMessage = (res) => {
+  console.log(res);
   return {
     type: DISPLAY_MSG,
     payload: res,
@@ -30,10 +32,10 @@ export const setMessage = (res) => {
 };
 
 export const storePost = (url, id, postData, history) => (dispatch) => {
-  console.log(url, id, postData, history)
-setTimeout(function(){
-  console.log(url, id, postData, history)
-}, 1000);
+  console.log(url, id, postData, history);
+  setTimeout(function () {
+    console.log(url, id, postData, history);
+  }, 1000);
   axios
     .post(`${url}/${id}`, postData)
     .then((res) => {
