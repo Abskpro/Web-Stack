@@ -1,29 +1,29 @@
 .post-detail-container {
-	/* margin-top:60px; */
-	background-color: #ebebeb;
-	padding-bottom: 16px;
+  /* margin-top:60px; */
+  background-color: #ebebeb;
+  padding-bottom: 16px;
 }
 .post-detail-container h2 {
-	padding-top: 36px;
-	position: relative;
+  padding-top: 36px;
+  position: relative;
 }
 .post-detail-container h2:after {
-	content: ' ';
-	position: absolute;
-	left: 0;
-	bottom: -8px;
-	width: 100%;
-	height: 3px;
-	background-color: rgba(0, 0, 0, 0.2);
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .post-detail-content {
-	margin-top: 16px;
+  margin-top: 16px;
 }
 .image-container {
-	padding-top: 8px;
+  padding-top: 8px;
 }
 .post-title {
-	padding-left: 8px;
+  padding-left: 8px;
 }
 .post-title h5,
 .post-description h5,
@@ -31,79 +31,79 @@
 .post-room-facilities h5,
 .post-room-location-container h5,
 .post-room-comment {
-	text-transform: capitalize;
-	text-decoration: underline;
-	letter-spacing: 0.5px;
+  text-transform: capitalize;
+  text-decoration: underline;
+  letter-spacing: 0.5px;
 }
 .basic-info,
 .post-description,
 .post-room-state,
 .post-room-facilities {
-	text-transform: capitalize;
-	font-size: 16px;
-	font-weight: 300;
-	padding-left: 8px;
-	letter-spacing: 0.2px;
-	margin-bottom: 16px;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 300;
+  padding-left: 8px;
+  letter-spacing: 0.2px;
+  margin-bottom: 16px;
 }
 .basic-info a {
-	text-decoration: underline;
-	color: #000;
-	transition: all 0.45s ease-in-out;
+  text-decoration: underline;
+  color: #000;
+  transition: all 0.45s ease-in-out;
 }
 #mail {
-	text-transform: lowercase;
+  text-transform: lowercase;
 }
 .basic-info a:hover,
 .basic-info a:active {
-	color: blue;
+  color: blue;
 }
 .post-description p {
-	/* margin: 0 16px; */
-	font-style: italic;
+  /* margin: 0 16px; */
+  font-style: italic;
 }
 
 .post-room-location-container h5 {
-	margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 /* warning chaning this will result in css breaking of map */
 .post-room-location {
-	position: relative;
-	height: 250px;
-	width: 100%;
-	margin: 0;
-	padding: 0;
+  position: relative;
+  height: 250px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 #comment {
-	border-radius: 8px;
-	margin: 16px 0;
-	padding: 16px;
-	width: 100%;
-	resize: none;
+  border-radius: 8px;
+  margin: 16px 0;
+  padding: 16px;
+  width: 100%;
+  resize: none;
 }
 
 /* this is new */
 .btn-cmnt-add {
-	padding: 5px;
-	border-radius: 8px;
-	border-style: solid;
+  padding: 5px;
+  border-radius: 8px;
+  border-style: solid;
 }
 #comment-btn {
-	padding: 10px 12px;
-	text-transform: uppercase;
-	transition: 0.3s all ease-in-out;
-	background-color: #bcbcbc;
+  padding: 10px 12px;
+  text-transform: uppercase;
+  transition: 0.3s all ease-in-out;
+  background-color: #bcbcbc;
 }
 .btn-disable {
-	color: #fff;
+  color: #fff;
 }
 
 .btn-enabled {
-	color: black;
+  color: black;
 }
 .comment-btn:focus {
-	outline-style: none;
+  outline-style: none;
 }
 
 /* this css is not changing */
@@ -114,30 +114,39 @@
 } */
 
 #comment:focus {
-	outline-style: none;
+  outline-style: none;
 }
 
 .comment {
-	margin-top: 20px;
-	width: 500px;
-	max-width: 100%;
-	padding: 10px 16px;
-	background-color: rgba(255, 255, 255, 0.5);
-	/* border:0.5px solid black; */
+  margin-top: 20px;
+  width: 500px;
+  max-width: 100%;
+  padding: 10px 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+  /* border:0.5px solid black; */
 }
 .user-name {
-	text-transform: lowercase;
-	font-size: 12px;
-	font-weight: 400;
-	color: #bcbcbc;
-	text-decoration: none; /*I dont know why tf this is not working*/
-	margin-bottom: 8px;
+  text-transform: lowercase;
+  font-size: 12px;
+  font-weight: 400;
+  color: #bcbcbc;
+  text-decoration: none; /*I dont know why tf this is not working*/
+  margin-bottom: 8px;
 }
 
 .comment-flex-container {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .user-comment {
-	text-decoration: none; /*I dont know why tf this is not working*/
+  text-decoration: none; /*I dont know why tf this is not working*/
+}
+
+.mapContainer {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
 }

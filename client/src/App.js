@@ -27,7 +27,7 @@ import setAuthToken from './utils/setAuthToken.jsx';
 import { setCurrentUser, logoutUser } from './actions/authAction.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import PostNotification from './components/Profile/PostNotification/PostNotifications.jsx';
-import RoutedPostDetail from './components/searchResult/PostDetail/Routed/Routed.jsx';
+// import RoutedPostDetail from './components/searchResult/PostDetail/Routed/Routed.jsx';
 import ResetPassword from './components/FormContainer/ResetPassword/ResetPassword.jsx';
 import EmailForm from './components/FormContainer/ResetPassword/Email.jsx';
 import TermsAndService from './components/Foooter/TermsAndService/TermsAndService';
@@ -125,7 +125,7 @@ class App extends Component {
 								/>
 								<Route
 									path='/routed/detail/:id/:type'
-									component={RoutedPostDetail}
+									component={PostDetail}
 								/>
 								<Route
 									path='/resetPassword/:token?'
