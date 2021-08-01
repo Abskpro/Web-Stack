@@ -1,6 +1,6 @@
-
 .search-page-content {
 	width: 70%;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 .search-page-title {
 	text-transform: capitalize;
@@ -13,4 +13,28 @@
 	font-size: 18px;
 	font-weight: 500;
 }
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
 
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 991px) {
+	.search-page-content {
+		width: 100%;
+	}
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 767px) {
+}
+/*Small devices*/
+@media only screen and (max-width: 575px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 479px) {
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 319px) {
+}
