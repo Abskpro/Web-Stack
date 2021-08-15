@@ -3,7 +3,8 @@ const { RoomSchema } = require("../models/rooms.model");
 
 const notificationSchema = new mongoose.Schema({
   createdBy: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: true,
   },
   location: {

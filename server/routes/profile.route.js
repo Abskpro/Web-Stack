@@ -6,7 +6,8 @@ const {
     UPDATE_HOME_POST,
     USER_PROFILE_POST,
     DELETE_USER_POST,
-    ANSWER_USER_COMMENTS
+    ANSWER_USER_COMMENTS,
+    LOAD_REPLY
 } = require('../controllers/profile.controller');
 
 
@@ -17,6 +18,7 @@ router.route('/updateHomePost/:id').put(UPDATE_HOME_POST);
 router.route('/updateUser/:id').put(UPDATE_USER_INFO);
 router.route('/deletepost/:id').post(DELETE_USER_POST);
 router.route('/loadComment/:id').get(ANSWER_USER_COMMENTS);
+router.route('/loadReply/:id').get(LOAD_REPLY);
 
 
 module.exports = router

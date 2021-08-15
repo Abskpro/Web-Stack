@@ -221,3 +221,7 @@
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 319px) {
 }
+
+.errormsg{
+  color:#DC143C
+}

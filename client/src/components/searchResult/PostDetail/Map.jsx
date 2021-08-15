@@ -22,6 +22,7 @@ class Map extends React.Component {
     console.log(this.props);
     this.setState({ lng: this.props.lng });
     this.setState({ lat: this.props.lat });
+
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -38,13 +39,21 @@ class Map extends React.Component {
     map.on("load", function () {
       map.resize();
     });
-    map.scrollZoom.disable();
+    // map.scrollZoom.disable();
   }
 
   componentWillReceiveProps(nextProps) {
     console.log(this.props);
-    this.setState({ lng: this.props.lng });
-    this.setState({ lat: this.props.lat });
+    // this.setState({ lng: this.props.lng });
+    // this.setState({ lat: this.props.lat });
+
+    if (this.props.lng > this.props.lat) {
+      this.setState({ lng: parseFloat(this.props.lng) });
+      this.setState({ lat: parseFloat(this.props.lat) });
+    } else {
+      this.setState({ lat: parseFloat(this.props.lng) });
+      this.setState({ lng: parseFloat(this.props.lat) });
+    }
   }
 
   render() {

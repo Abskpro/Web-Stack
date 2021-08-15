@@ -23,28 +23,35 @@ const Model = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
-        <div className = "modal-content">
-          <div className = "modal-content-row">
-            <div className = "modal-content-col">
-              <img
-                src={`https://res.cloudinary.com/ds6o6pq2w/image/upload/v1607069456/images/${props.comment.post.image}.jpg`}
-                alt="#"
-              />
+        <div className="modal-content">
+          <div className="modal-content-row">
+            <div className="modal-content-col">
+              {props.comment.post.image != undefined ? (
+                <img
+                  src={`https://res.cloudinary.com/ds6o6pq2w/image/upload/v1607069456/images/${props.comment.post.image}.jpg`}
+                  alt="#"
+                />
+              ) : (
+                <img
+                  src={`https://res.cloudinary.com/ds6o6pq2w/image/upload/v1607069456/images/no-image-placeholder.jpg`}
+                  alt="#"
+                />
+              )}
             </div>
-
-            <div className = "modal-content-col">
+            <div className="modal-content-col">
               <div className="usr-info">
-                <label className = "usr-info-title">User :</label>
-                <label className = "usr-info-name">
+                <label className="usr-info-title">User :</label>
+                <label className="usr-info-name">
                   &nbsp;
-                  {props.comment.comment.name}</label>
+                  {props.comment.comment.name}
+                </label>
               </div>
 
               <div className="usr-cmt">
                 <div>{props.comment.comment.question}</div>
-                <div className = "usr-cmt-date">
+                <div className="usr-cmt-date">
                   <span>Posted in</span>
-                    &nbsp;
+                  &nbsp;
                   <span>
                     {`${props.comment.comment.createdAt}`.slice(0, 10)}
                   </span>
@@ -56,15 +63,13 @@ const Model = (props) => {
                   <textarea
                     onChange={(e) => props.onChange(e)}
                     className="cmt-txt"
-                    
+
                     // placeholder={props.comment.comment.isAnswered ? props.comment.comment.answer : "Enter your response" }
                   ></textarea>
                 </div>
               </form>
-              
             </div>
           </div>
-         
         </div>
       </Modal.Body>
       <Modal.Footer>

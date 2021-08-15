@@ -1,10 +1,14 @@
 const express = require("express");
 const webpush = require("web-push");
 const nodemailer = require("nodemailer");
+const { google }  = require('googleapis');
 require("dotenv").config();
 const user = process.env.user;
 const password = process.env.password;
-
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 /**
  * pushNotification.
  *
@@ -34,19 +38,29 @@ const pushNotification = async (push, message) => {
  * @param {} link [link to be sent to the user for interation]
  */
 const mailNotification = async (emailId, message, link) => {
+
+  const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+  oAuth2Client.setCredentials({ refresh_token:REFRESH_TOKEN})
+  const accessToken = await oAuth2Client.getAccessToken();
+
   console.log(emailId, message, link);
   let smtpTrasport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
       user: user,
-      pass: password,
+      // pass: password,
+      type:'OAuth2', 
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      refreshToken: REFRESH_TOKEN,
+      accessToken: accessToken
     },
   });
   let mailOptions = {
-    from: `Bot <${user}>`,
+    from: `Choose Your Space <${user}>`,
     to: `${emailId}`,
-    subject: "Airbnb 2.0",
-    text: message,
+    subject: "Notification Alert",
+    text:" hello",
     html: link,
   };
   smtpTrasport.sendMail(mailOptions, function (err) {

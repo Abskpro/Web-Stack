@@ -18,7 +18,7 @@ export default function (state = initialState, action) {
 
     case GET_ERRORS:
       return {
-        ...state,
+       ...state,
         error: action.payload,
       };
     default:
