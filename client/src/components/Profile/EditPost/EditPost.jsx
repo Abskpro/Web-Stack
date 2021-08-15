@@ -42,7 +42,7 @@ class EditPost extends Component {
       previewSource: [],
       lng: 85.314038,
       lat: 27.70549,
-      zoom: 5,
+      zoom: 10,
       facilities: [],
     };
 
@@ -57,7 +57,14 @@ class EditPost extends Component {
   componentDidMount() {
     console.log(this.props);
     const data = this.props.location.state;
-    let coor = [data.coordinates.longitude, data.coordinates.latitude];
+    let coor;
+    if (data.coordinates.longitude > data.coordinates.latitude) {
+      coor = [data.coordinates.longitude, data.coordinates.latitude];
+      console.log("opposite");
+    } else {
+      console.log("posit");
+      coor = [data.coordinates.latitude, data.coordinates.longitude];
+    }
     console.log(data);
     console.log(data.coordinates.longitude);
     this.setState({ id: this.props.location.state._id });
@@ -188,8 +195,8 @@ class EditPost extends Component {
       location: this.state.location,
       description: this.state.description,
       coordinates: {
-        latitude: this.state.coordinates[0],
-        longitude: this.state.coordinates[1],
+        longitude: this.state.coordinates[0],
+        latitude: this.state.coordinates[1],
       },
       rooms: {
         bedroom: parseInt(this.state.bedroom),
@@ -212,8 +219,8 @@ class EditPost extends Component {
       location: this.state.location,
       description: this.state.description,
       coordinates: {
-        latitude: this.state.coordinates[0],
-        longitude: this.state.coordinates[1],
+        longitude: this.state.coordinates[0],
+        latitude: this.state.coordinates[1],
       },
       area: this.state.area,
       rooms: {
@@ -237,7 +244,17 @@ class EditPost extends Component {
           House
         )
         .then((res) => {
-          this.props.routeAndDisplay(res);
+          console.log(res.data);
+          // this.props.routeAndDisplay(res);
+          toast.info(res.data.msg, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
 
           if (res.status == 200) {
             this.props.history.goBack();
@@ -251,8 +268,16 @@ class EditPost extends Component {
         .put(`/api/profile/updatePost/${this.props.location.state._id}`, data)
         .then((res) => {
           console.log(res);
-          this.props.routeAndDisplay(res);
-
+          // this.props.routeAndDisplay(res);
+          toast.info(res.data.msg, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           if (res.status == 200) {
             this.props.history.goBack();
           }
@@ -462,7 +487,7 @@ class EditPost extends Component {
                 {this.state.imageCollection &&
                   this.state.imageCollection.map((image) => {
                     return (
-                      <Col>
+                      <Col key={image}>
                         <div className="post-image">
                           <div className="image-container">
                             <img

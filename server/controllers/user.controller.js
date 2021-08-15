@@ -120,6 +120,36 @@ const loginUser = (req, res) => {
       });
     }
 
+    if (user.profile) {
+      if (user.password == password) {
+        const payload = {
+          id: user.id,
+          name: user.name,
+          profile: user.profile,
+          email: user.email,
+          number: user.number,
+        };
+
+        jwt.sign(
+          payload,
+          key.secretKey,
+          {
+            expiresIn: 3600,
+          },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer" + token,
+            });
+          }
+        );
+      } else {
+        return res
+          .status(400)
+          .send({ error: "username or passsword incorrect" });
+      }
+    }
+
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
         const payload = {
@@ -215,9 +245,9 @@ const passwordResetToken = async (req, res) => {
 
 const resetPasswordLogged = async (req, res) => {
   const user = await User.findById(req.params.id);
-  bcrypt.compare(req.body.oldPassword, user.password).then((isMatch) => {
-    if (isMatch) {
-      console.log("asdf");
+
+  if (user.profile) {
+    if (user.password == req.body.oldPassword) {
       const { errors, isValid } = validateResetPassword(req.body);
       if (!isValid) {
         console.log("is not valid");
@@ -227,6 +257,7 @@ const resetPasswordLogged = async (req, res) => {
         bcrypt.hash(req.body.newPassword, salt, (err, hash) => {
           if (err) throw err;
           User.findByIdAndUpdate(req.params.id, {
+            profile: false,
             password: hash,
           }).then((data) => {
             console.log(data);
@@ -237,7 +268,31 @@ const resetPasswordLogged = async (req, res) => {
     } else {
       res.status(403).send({ msg: "Incorrect OldPassword" });
     }
-  });
+  } else {
+    bcrypt.compare(req.body.oldPassword, user.password).then((isMatch) => {
+      if (isMatch) {
+        console.log("asdf");
+        const { errors, isValid } = validateResetPassword(req.body);
+        if (!isValid) {
+          console.log("is not valid");
+          return res.status(400).json(errors);
+        }
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(req.body.newPassword, salt, (err, hash) => {
+            if (err) throw err;
+            User.findByIdAndUpdate(req.params.id, {
+              password: hash,
+            }).then((data) => {
+              console.log(data);
+              res.status(200).send({ msg: "Password reset successful" });
+            });
+          });
+        });
+      } else {
+        res.status(403).send({ msg: "Incorrect OldPassword" });
+      }
+    });
+  }
 };
 
 module.exports = {

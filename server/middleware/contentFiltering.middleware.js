@@ -57,10 +57,12 @@ const recommend = async (data, req) => {
   });
   promise
     .then((documents) => {
+      console.log(documents);
       recommender.train(documents);
     })
     .then(() => {
       const similarDocuments = recommender.getSimilarDocuments("1", 0, 10);
+      console.log(similarDocuments);
     });
   const documents = await promise;
   recommender.train(documents);

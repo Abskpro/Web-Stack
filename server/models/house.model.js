@@ -38,11 +38,11 @@ const HouseSchema = new mongoose.Schema({
   coordinates: {
     latitude: {
       type: String,
-      required: true,
+      // required: true,
     },
     longitude: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   area: {
@@ -81,7 +81,7 @@ const HouseSchema = new mongoose.Schema({
   },
   imageCollection: {
     type: Array,
-    required: true,
+    // required: true,
   },
 });
 

@@ -249,7 +249,7 @@ const DELETE_USER_POST = (req, res) => {
           });
         });
       })
-      .then(() => res.status(200).send({msg: "Post deleted Successfully"}))
+      .then(() => res.status(200).send({ msg: "Post deleted Successfully" }))
       .catch((err) => res.status(404).json("error" + err));
   } else {
     House.findByIdAndDelete(req.params.id)
@@ -262,7 +262,7 @@ const DELETE_USER_POST = (req, res) => {
           );
         });
       })
-      .then(() => res.status(200).send({msg: "Post deleted Successfully"}))
+      .then(() => res.status(200).send({ msg: "Post deleted Successfully" }))
       .catch((err) => res.status(404).json("error" + err));
   }
 };
@@ -303,6 +303,51 @@ const ANSWER_USER_COMMENTS = (req, res) => {
 
 const Notify = (req, res) => {};
 
+const LOAD_REPLY = async (req, res) => {
+  Comment.find({ createdBy: req.params.id }).then(async (data) => {
+    let datum1 = await Promise.all(
+      data.map(async (item) => {
+        return await Room.findOne({ _id: item.postId }).then((room) => {
+          console.log(room);
+          if (room == null) {
+            return 0;
+          } else {
+            return {
+              title: room.title,
+              image: room.imageCollection[0],
+              comment: item,
+              type:"Room"
+            };
+          }
+        });
+      })
+    );
+    let datum2 = await Promise.all(
+      data.map(async (item) => {
+        return await House.findOne({ _id: item.postId }).then((house) => {
+          console.log(house);
+          if (house == null) {
+            return 0;
+          } else {
+            return {
+              title: house.title,
+              image: house.imageCollection[0],
+              comment: item,
+              type:"House"
+            };
+          }
+        });
+      })
+    );
+    var settle = await Promise.allSettled([datum1, datum2]).then(() => [
+      ...datum1,
+      ...datum2,
+    ]);
+    console.log("loading reply", settle.filter((data) => data != 0));
+    res.json(settle.filter((data) => data != 0));
+  });
+};
+
 module.exports = {
   USER_PROFILE_POST,
   USER_PROFILE_INFO,
@@ -311,4 +356,5 @@ module.exports = {
   UPDATE_HOME_POST,
   DELETE_USER_POST,
   ANSWER_USER_COMMENTS,
+  LOAD_REPLY,
 };

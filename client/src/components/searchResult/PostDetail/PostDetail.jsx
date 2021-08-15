@@ -11,7 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import "./PostDetails.css";
 import Map from "./Map.jsx";
-// import Map from '../../../utils/Maps/Map.jsx';
 
 const Image = (props) => (
   <div>
@@ -41,14 +40,19 @@ const PostDetail = (props) => {
 
   function displayImage() {
     console.log(props.location.state);
-    return post.imageCollection.map((image, index) => {
-      let url = `https://res.cloudinary.com/ds6o6pq2w/image/upload/v1605056350/images/${image}`;
+    if (post.imageCollection.length != 0) {
+      return post.imageCollection.map((image, index) => {
+        let url = `https://res.cloudinary.com/ds6o6pq2w/image/upload/v1605056350/images/${image}`;
+        return <Image img={url} key={post._id} />;
+      });
+    } else {
+      let url = `https://res.cloudinary.com/ds6o6pq2w/image/upload/v1605056350/images/no-image-placeholder`;
       return <Image img={url} key={post._id} />;
-    });
+    }
   }
 
   useEffect(() => {
-      console.log(props.location.state);
+    console.log(props.location.state);
     if (props.location.state != undefined) {
       setPost(props.location.state);
       setLoading(false);
@@ -68,7 +72,7 @@ const PostDetail = (props) => {
   }, []);
 
   function loadComment() {
-    console.log("loading is " + loading + "and post is  " + post); 
+    console.log("loading is " + loading + "and post is  " + post);
     if (loadingComment && post != null) {
       axios.get(`/api/comment/loadComment/${post._id}`).then((data) => {
         console.log(data.data);
@@ -122,12 +126,10 @@ const PostDetail = (props) => {
           }
 
           console.log(data);
-          axios
-            .get(`/api/comment/loadComment/${post._id}`)
-            .then((data) => {
-              console.log(data);
-              setComments(data.data);
-            });
+          axios.get(`/api/comment/loadComment/${post._id}`).then((data) => {
+            console.log(data);
+            setComments(data.data);
+          });
         });
     } else {
       console.log("comment must not be empty");

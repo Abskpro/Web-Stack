@@ -13,6 +13,7 @@ const CommentRouter = require('./routes/comment.route');
 const ProfileRouter = require('./routes/profile.route');
 const AdminRouter = require('./routes/admin.route');
 const PostNotifications= require('./routes/postNotification.route');
+const {mailNotification } = require('./middleware/notification.controller'); 
 
 const app = express();
 

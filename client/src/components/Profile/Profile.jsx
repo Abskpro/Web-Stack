@@ -14,17 +14,19 @@ const Profile = (props) => {
   const [key, setKey] = useState("home");
 
   useEffect(() => {
-    console.log(props);
-    if (props.msg.message.status == 200) {
-      toast.info(`${props.msg.message.data.msg}`, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    console.log("thesea are the ", props);
+    if (props.msg.message.status != null) {
+      if (props.msg.message.status == 200 || props.msg.message.status == 201) {
+        toast.info(`${props.msg.message.data.msg}`, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
   }, [props.msg]);
 
@@ -40,7 +42,7 @@ const Profile = (props) => {
           <Tab eventKey="home" title="Your Posts">
             <UserPosts />
           </Tab>
-          
+
           <Tab eventKey="profile" title="Profile">
             <UserInfo />
           </Tab>
@@ -66,7 +68,6 @@ const Profile = (props) => {
 
 // export default Profile;
 Profile.propTypes = {
-  loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   msg: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
