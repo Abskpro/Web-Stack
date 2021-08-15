@@ -25,5 +25,9 @@
   "homepage": "https://github.com/Abskpro/FinalProject#readme",
   "devDependencies": {
     "concurrently": "^5.3.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react-confirm-alert": "^2.7.0"
   }
 }

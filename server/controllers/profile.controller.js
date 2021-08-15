@@ -267,6 +267,19 @@ const DELETE_USER_POST = (req, res) => {
   }
 };
 
+const DELETE_POST_IMAGE = (req, res) => {
+  try {
+    console.log("deleting image");
+    cloudinary.uploader.destroy(`images/${req.params.id}`, async (error, result) => {
+      console.log("Something");
+      console.log(result, error);
+    });
+    return res.status(200).send({ msg: "Image deleted successfully" });
+  } catch (e) {
+    return res.status(500);
+  }
+};
+
 const ANSWER_USER_COMMENTS = (req, res) => {
   Room.find({ createdBy: req.params.id })
     .then(async (data) => {
@@ -277,6 +290,7 @@ const ANSWER_USER_COMMENTS = (req, res) => {
               title: item.title,
               image: item.imageCollection[0],
               comment: comment,
+              type: "Room",
             };
           });
         })
@@ -292,6 +306,7 @@ const ANSWER_USER_COMMENTS = (req, res) => {
                 title: item.title,
                 image: item.imageCollection[0],
                 comment: comment,
+              type: "House",
               };
             });
           })
@@ -316,7 +331,7 @@ const LOAD_REPLY = async (req, res) => {
               title: room.title,
               image: room.imageCollection[0],
               comment: item,
-              type:"Room"
+              type: "Room",
             };
           }
         });
@@ -333,7 +348,7 @@ const LOAD_REPLY = async (req, res) => {
               title: house.title,
               image: house.imageCollection[0],
               comment: item,
-              type:"House"
+              type: "House",
             };
           }
         });
@@ -343,7 +358,10 @@ const LOAD_REPLY = async (req, res) => {
       ...datum1,
       ...datum2,
     ]);
-    console.log("loading reply", settle.filter((data) => data != 0));
+    console.log(
+      "loading reply",
+      settle.filter((data) => data != 0)
+    );
     res.json(settle.filter((data) => data != 0));
   });
 };
@@ -357,4 +375,5 @@ module.exports = {
   DELETE_USER_POST,
   ANSWER_USER_COMMENTS,
   LOAD_REPLY,
+  DELETE_POST_IMAGE
 };
