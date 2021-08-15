@@ -31,3 +31,13 @@
 	border-radius: 5px;
 	cursor: pointer;
 }
+
+.post-image{
+  position:relative;
+}
+
+.cont{
+  width:40px;
+  height:40px;
+  position:absolute;right:-10px;top:-15px;}
+

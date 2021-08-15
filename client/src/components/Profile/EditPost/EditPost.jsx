@@ -10,8 +10,10 @@ import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { ToastContainer, toast } from "react-toastify";
 import { withRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { useHistory } from "react-router-dom";
 import { routeAndDisplay } from "../../../actions/postAction.js";
+
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 //CSS
 import "../../FormComponent/formComponent.css";
 import "./EditPost.css";
@@ -52,6 +54,7 @@ class EditPost extends Component {
     this.onPreviewFile = this.onPreviewFile.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.onDelete = this.onDelete.bind(this);
+    this.onDeleteImage = this.onDeleteImage.bind(this);
   }
 
   componentDidMount() {
@@ -144,6 +147,169 @@ class EditPost extends Component {
   onChangeLocation(e) {
     console.log(e.target.value);
     this.setState({ location: e.target.value });
+  }
+
+  onDeleteImage(image) {
+    var imageLength = this.state.imageCollection.length;
+    var that = this;
+    confirmAlert({
+      title: "Confirm delete",
+      message: "You are about to delete this image. Are you sure?",
+      closeOnEscape: true,
+      closeOnClickOutside: true,
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            deleteImage();
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+
+    function deleteImage() {
+      console.log("delting image");
+      if (imageLength == 1) {
+        toast.info("At least one image is required", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        console.log(image);
+        that.setState({
+          imageCollection: that.state.imageCollection.filter(function (value) {
+            return value != image;
+          }),
+        });
+        const data = {
+          name: that.state.name,
+          email: that.state.email,
+          number: parseInt(that.state.number),
+          title: that.state.title,
+          location: that.state.location,
+          description: that.state.description,
+          coordinates: {
+            longitude: that.state.coordinates[0],
+            latitude: that.state.coordinates[1],
+          },
+          rooms: {
+            bedroom: parseInt(that.state.bedroom),
+            kitchen: parseInt(that.state.kitchen),
+            toilet: parseInt(that.state.toilet),
+            livingRoom: parseInt(that.state.livingRoom),
+          },
+          furnished: that.state.furnished,
+          facilities: that.state.facilities,
+          price: parseInt(that.state.price),
+          imageCollection: that.state.imageCollection.filter(function (value) {
+            return value != image;
+          }),
+          additionalImage: JSON.stringify(that.state.previewSource),
+        };
+
+        const House = {
+          name: that.state.name,
+          email: that.state.email,
+          number: parseInt(that.state.number),
+          title: that.state.title,
+          location: that.state.location,
+          description: that.state.description,
+          coordinates: {
+            longitude: that.state.coordinates[0],
+            latitude: that.state.coordinates[1],
+          },
+          area: that.state.area,
+          rooms: {
+            bedroom: parseInt(that.state.bedroom),
+            kitchen: parseInt(that.state.kitchen),
+            toilet: parseInt(that.state.toilet),
+            livingRoom: parseInt(that.state.livingRoom),
+          },
+          furnished: that.state.furnished,
+          facilities: that.state.facilities,
+          price: parseInt(that.state.price),
+          imageCollection: that.state.imageCollection.filter(function (value) {
+            return value != image;
+          }),
+          additionalImage: JSON.stringify(that.state.previewSource),
+        };
+        console.log(data);
+        console.log(typeof JSON.stringify(data));
+        if (that.props.location.state.area) {
+          axios
+            .put(
+              `/api/profile/updateHomePost/${that.props.location.state._id}`,
+              House
+            )
+            .then((res) => {
+              console.log(res.data);
+              toast.info(res.data.msg, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            })
+            .catch((error) => {
+              console.log(error.response);
+            });
+        } else {
+          axios
+            .put(
+              `/api/profile/updatePost/${that.props.location.state._id}`,
+              data
+            )
+            .then((res) => {
+              console.log(res);
+              // that.props.routeAndDisplay(res);
+              toast.info(res.data.msg, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            })
+            .catch((error) => {
+              console.log(error.response);
+            });
+        }
+
+        axios
+          .delete(`/api/profile/deleteImage/${image}`)
+          .then((res) => {
+            console.log(res.data);
+            // this.props.routeAndDisplay(res);
+            toast.info(res.data.msg, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            this.onSubmit();
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
+      }
+    }
   }
 
   onPreviewFile(file) {
@@ -494,6 +660,13 @@ class EditPost extends Component {
                               src={`https://res.cloudinary.com/ds6o6pq2w/image/upload/v1607069456/images/${image}.jpg`}
                               alt="#"
                             />
+                            <div className="cont">
+                              <img
+                                src="https://www.pinclipart.com/picdir/big/186-1861007_oppose-any-increase-in-funding-for-border-militarization.png"
+                                alt="#"
+                                onClick={() => this.onDeleteImage(image)}
+                              />
+                            </div>
                           </div>
                         </div>
                       </Col>
