@@ -57,7 +57,7 @@ const addRoomPost = async (req, res, next) => {
       newRoom
         .save()
         .then((data) => {
-          Notifier(_.location, "Room", data._id, req.get("host"));
+          // Notifier(_.location, "Room", data._id, req.get("host"));
           res.status(201).json({msg: "Post added" });
         })
         .catch((err) => res.status(400).json("error" + err));
