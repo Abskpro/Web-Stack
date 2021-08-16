@@ -212,10 +212,10 @@ class Addroom extends Component {
       }
 
       axios
-        .post(`http://localhost:5000${url}/${this.props.auth.user.id}`, data)
+        .post(`${url}/${this.props.auth.user.id}`, data)
         .then((res) => {
           console.log(res);
-          if (res.status == 201) {
+          if (res.status === 201) {
     
             routeAndDisplay(res.data.msg);
             this.props.history.push({
