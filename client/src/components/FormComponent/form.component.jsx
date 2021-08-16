@@ -241,7 +241,7 @@ class Addroom extends Component {
   }
 
   render() {
-    const options = ["CableTv", "Parking", "Internet", "Water-Supply"];
+    const options = ["CableTv", "Parking", "Internet", "Water-Supply", "Air-Conditioning", "Bathtub"];
     return (
       <section className="user-section" style={{}}>
         <Container>
