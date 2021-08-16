@@ -120,7 +120,7 @@ const addHousePost = async (req, res, next) => {
       newHouse
         .save()
         .then((data) => {
-          Notifier(_.location, "House", data._id, req.get("host"));
+          // Notifier(_.location, "House", data._id, req.get("host"));
           res.status(201).json({msg: "Post added" });
         })
         .catch((err) => res.status(400).json("error" + err));
