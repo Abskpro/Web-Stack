@@ -20,7 +20,7 @@ const searchPost = (req, res) => {
                     index = arr2.indexOf(data.id);
                     arr[index] = data;
                 });
-                console.log("this is sorted recommendation", arr.length);
+                console.log("this is sorted recommendation", arr);
                 res.json(arr);
             })
             .catch((err) => console.log(err));
