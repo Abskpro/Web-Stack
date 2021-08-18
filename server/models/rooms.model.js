@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const RoomSchema = new mongoose.Schema({
     createdAt: {
@@ -8,20 +8,20 @@ const RoomSchema = new mongoose.Schema({
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
         required: true,
     },
-    name:{
-        type:String,
-        required:true
+    name: {
+        type: String,
+        required: true,
     },
-    email:{
-        type:String,
-        required:true
+    email: {
+        type: String,
+        required: true,
     },
-    number:{
-        type:Number,
-        required:true
+    number: {
+        type: Number,
+        required: true,
     },
     title: {
         type: String,
@@ -33,17 +33,17 @@ const RoomSchema = new mongoose.Schema({
     },
     coordinates: {
         latitude: {
-            type:Number,
-            required: true,
+            type: Number,
+            // required: true,
         },
         longitude: {
-            type:Number,
-            required: true,
+            type: Number,
+            // required: true,
         },
     },
-    description:{
-        type:String,
-        required:true
+    description: {
+        type: String,
+        required: true,
     },
     rooms: {
         bedroom: {
@@ -58,18 +58,18 @@ const RoomSchema = new mongoose.Schema({
             type: Number,
             required: true,
         },
-        livingRoom:{
-            type:Number,
-            required:true
-        }
+        livingRoom: {
+            type: Number,
+            required: true,
+        },
     },
-    facilities:{
-        type:Array,
-        required:true
+    facilities: {
+        type: Array,
+        required: true,
     },
-    furnished:{
-        type:String,
-        required:true
+    furnished: {
+        type: String,
+        required: true,
     },
     price: {
         type: Number,
@@ -77,11 +77,10 @@ const RoomSchema = new mongoose.Schema({
     },
     imageCollection: {
         type: Array,
-        required: true,
+        // required: true,
     },
 });
 
-const Room = mongoose.model('Room', RoomSchema);
+const Room = mongoose.model("Room", RoomSchema);
 
 module.exports = Room;
-

@@ -114,13 +114,26 @@ class EditPost extends Component {
                 zoom: map.getZoom().toFixed(2),
             });
         });
-        console.log(this.state.id);
+        console.log(
+            this.props.location.state.coordinates.longitude,
+            this.props.location.state.coordinates.latitude
+        );
         var marker = new mapboxgl.Marker({
             draggable: true,
         })
             .setLngLat([
-                this.props.location.state.coordinates.longitude,
-                this.props.location.state.coordinates.latitude,
+                this.props.location.state.coordinates.longitude === undefined ||
+                this.props.location.state.coordinates.longitude === null ||
+                this.props.location.state.coordinates.longitude === "" ||
+                this.props.location.state.coordinates.longitude === 0
+                    ? 85.30310259124457
+                    : this.props.location.state.coordinates.longitude,
+                this.props.location.state.coordinates.latitude === "" ||
+                this.props.location.state.coordinates.latitude === null ||
+                this.props.location.state.coordinates.latitude === undefined ||
+                this.props.location.state.coordinates.latitude === 0
+                    ? 27.68795955939298
+                    : this.props.location.state.coordinates.latitude,
             ])
             .addTo(map);
 
