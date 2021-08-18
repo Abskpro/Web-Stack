@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
-    postId:{
-        type:String,
-        required:true
+    postId: {
+        type: String,
+        required: true,
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
         required: true,
     },
     name: {
@@ -20,11 +20,11 @@ const commentSchema = new mongoose.Schema({
     },
     question: {
         type: String,
-        default:null
+        default: null,
     },
     answer: {
         type: String,
-        default:null
+        default: null,
     },
     isAnswered: {
         type: Boolean,
@@ -32,6 +32,6 @@ const commentSchema = new mongoose.Schema({
     },
 });
 
-const Comment = mongoose.model('Comment',commentSchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
 module.exports = Comment;
