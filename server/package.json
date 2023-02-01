@@ -38,7 +38,7 @@
         "googleapis": "^84.0.0",
         "is-empty": "^1.2.0",
         "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.9.13",
+        "mongoose": "^5.13.15",
         "natural": "^2.1.5",
         "nodemailer": "^6.4.6",
         "stopword": "^1.0.1",
