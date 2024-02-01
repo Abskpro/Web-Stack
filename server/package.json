@@ -40,7 +40,7 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.9.13",
         "natural": "^2.1.5",
-        "nodemailer": "^6.4.6",
+        "nodemailer": "^6.9.9",
         "stopword": "^1.0.1",
         "striptags": "^3.1.1",
         "underscore": "^1.12.0",
